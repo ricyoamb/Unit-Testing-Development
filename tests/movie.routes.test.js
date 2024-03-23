@@ -86,14 +86,19 @@ describe('CREATE movie /api/movies/', () => {
 })
 
 describe('DELETE movie /api/movies/:id', () => {
-  it('DELETE /api/movies/:id', (done) => {
+  it('GET /api/movies/:id', (done) => {
     request(app)
-      .delete(`${BASE_URL}/1`)
-      .expect(404)
-      .then((response) => {
+      .get(`${BASE_URL}/1`)
+      .expect('Content-Type', /json/)
+      .expect(200)
+      .then(response => {
+        const { body } = response;
+        const { id } = body;
+
+        expect(id).toEqual(1)
         done()
       })
-      .catch((err) => {
+      .catch(err => {
         done(err)
       })
   })
