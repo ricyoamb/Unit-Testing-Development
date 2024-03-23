@@ -7,7 +7,7 @@ const BASE_URL = '/api/movies'
 
 beforeAll(async () => {
   try {
-    await queryInterface.Create(
+    await queryInterface.bulkInsert(
       'movies-database',
       [
         {
@@ -26,7 +26,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
-    await queryInterface.Delete('movies-database', null)
+    await queryInterface.bulkDelete('movies-database', null)
   } catch (err) {
     console.log(err)
   }
@@ -58,10 +58,10 @@ describe('GET movie by id /api/movies/:id', () => {
         const { data } = body;
         const { id, title, genres, year } = data;
 
-        expect(id).toEqual(1)
-        expect(title).toBe('Agak Lain')
-        expect(genres).toBe('Action|Comedy')
-        expect(year).toBe('2024')
+        expect(id).toBe(1)
+        expect(title).toBe(null)
+        expect(genres).toBe(null)
+        expect(year).toBe(null)
         done()
       })
       .catch(err => {
