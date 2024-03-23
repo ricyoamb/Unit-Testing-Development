@@ -29,8 +29,6 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          DB_TEST: movies-database-test
-          DB_HOST: postgres
         # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
@@ -51,4 +49,4 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - name: run unit testing
-      run: npm test
+      run: npm testcicd
