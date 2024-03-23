@@ -12,7 +12,7 @@ const config = {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.DB_TEST,
-    host: 'localhost',
+    host: process.env.DB_HOST,
     dialect: 'postgres',
   },
   docker: {

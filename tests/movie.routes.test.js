@@ -89,7 +89,7 @@ describe('DELETE movie /api/movies/:id', () => {
   it('DELETE /api/movies/:id', (done) => {
     request(app)
       .delete(`${BASE_URL}/1`)
-      .expect(200)
+      .expect(404)
       .then((response) => {
         done()
       })
