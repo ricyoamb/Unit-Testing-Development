@@ -35,8 +35,8 @@ class movieRepository {
     try {
       const movie = await Movie.findOne({
         where: {
-          id
-        }
+          id,
+        },
       })
 
       if (!movie) throw { name: 'ErrorNotFound', message: 'Movie not found' }

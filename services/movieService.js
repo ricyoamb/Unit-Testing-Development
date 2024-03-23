@@ -63,8 +63,8 @@ class MovieService {
     try {
       const filterOption = {
         where: {
-          id
-        }
+          id,
+        },
       }
       await movieRepository.destroy(filterOption)
     } catch (err) {

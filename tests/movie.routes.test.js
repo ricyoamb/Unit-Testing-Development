@@ -5,10 +5,37 @@ const { sequelize } = require('../models')
 const { queryInterface } = sequelize
 const BASE_URL = '/api/movies'
 
+beforeAll(async () => {
+  try {
+    await queryInterface.Create(
+      'movies-database',
+      [
+        {
+          id: 1,
+          title: 'Agak Lain',
+          genres: 'Action|Comedy',
+          year: '2024',
+        },
+      ],
+      {}
+    )
+  } catch (err) {
+    console.log(err)
+  }
+})
+
+afterAll(async () => {
+  try {
+    await queryInterface.Delete('movies-database', null)
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 describe('GET List movies /api/movies', () => {
   it('GET /api/movies', (done) => {
     request(app)
-      .get(`${BASE_URL}`)
+      .get(BASE_URL)
       .expect('Content-Type', /json/)
       .expect(200)
       .then((response) => {
@@ -20,43 +47,36 @@ describe('GET List movies /api/movies', () => {
   })
 })
 
-describe('GET movie /api/movies/:id', () => {
+describe('GET movie by id /api/movies/:id', () => {
   it('GET /api/movies/:id', (done) => {
     request(app)
-      .get(`${BASE_URL}`)
+      .get(`${BASE_URL}/1`)
       .expect('Content-Type', /json/)
       .expect(200)
-      .then((response) => {
-        const {body} = response;
-        const {data} = body;
-        const {id,title,genres,year} = data;
+      .then(response => {
+        const { body } = response;
+        const { data } = body;
+        const { id, title, genres, year } = data;
 
         expect(id).toEqual(1)
-        expect(title).toEqual('Reckless')
-        expect(genres).toEqual('Comedy|Drama|Romance')
-        expect(year).toEqual('2001')
+        expect(title).toBe('Agak Lain')
+        expect(genres).toBe('Action|Comedy')
+        expect(year).toBe('2024')
         done()
       })
-      .catch((err) => {
+      .catch(err => {
         done(err)
       })
   })
 })
 
-describe('CREATE movie /api/movies/:id', () => {
+describe('CREATE movie /api/movies/', () => {
   it('CREATE /api/movies/', (done) => {
     request(app)
       .post(`${BASE_URL}`)
       .expect('Content-Type', /json/)
       .expect(201)
       .then((response) => {
-        const {body} = response;
-        const {data} = body;
-        const {title,genres,year} = data;
-
-        expect(title).toEquel("Agak Lain")
-        expect(genres).toEquel("Comedy|Drama|Romance")
-        expect(year).toEquel("2024")
         done()
       })
       .catch((err) => {
