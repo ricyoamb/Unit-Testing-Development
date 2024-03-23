@@ -4,7 +4,7 @@
 
 * Nodejs 20.11.0
 * Postgresql 8.11.3
-* Postman (for API testing)
+* Docker Desktop
 
 ## Pre-requesited
 * migrate with sequelize
@@ -20,7 +20,16 @@ $ pg_restore -U postgres -d movies-database -c  movies-database.sql
 
 ### Getting Started
 
-* Run the program
+* Run unit testing local
+```
+$ npm run test
+```
+
+* Run docker
+```
+$ npm run docker
+```
+* Run CI/CD
 ```
 $ npm run start
 ```
@@ -29,4 +38,5 @@ $ npm run start
 
 * [Express](https://expressjs.com)
 * [Postgresql](https://www.postgresql.org)
+* [Docker](https://hub.docker.com/)
 * [Stackoverflow](https://stackoverflow.com)
